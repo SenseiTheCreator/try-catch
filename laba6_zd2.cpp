@@ -20,21 +20,18 @@ private:
     int yearBuilt;
 
 public:
-    // Конструктор
     RealEstate() : area(0), roomCount(0), isCommercial(false), price(0), yearBuilt(0) {}
 
     void Input()
     {
         cout << "\n--- Початок введення даних про об'єкт ---\n";
 
-        // Адреса
         cout << "Введіть адресу: ";
         getline(cin, address);
         if (address.empty()) {
             throw runtime_error("Адреса не може бути порожньою.");
         }
 
-        // Площа
         while (true) {
             cout << "Введіть площу (м2): ";
             try {
@@ -51,7 +48,6 @@ public:
             }
         }
 
-        // Кількість кімнат
         while (true) {
             cout << "Введіть кількість кімнат: ";
             try {
@@ -69,7 +65,6 @@ public:
             }
         }
 
-        // Тип нерухомості
         while (true) {
             cout << "Це комерційна нерухомість? (1 - так, 0 - ні): ";
             try {
@@ -89,7 +84,6 @@ public:
             }
         }
 
-        // Ціна
         while (true) {
             cout << "Введіть ціну (в $): ";
             try {
@@ -107,14 +101,12 @@ public:
             }
         }
 
-        // Ім'я власника
         cout << "Введіть ім'я власника: ";
         getline(cin, ownerName);
         if (ownerName.empty()) {
             throw runtime_error("Ім'я власника не може бути порожнім.");
         }
 
-        // Рік побудови
         while (true) {
             cout << "Введіть рік побудови: ";
             try {
@@ -133,7 +125,6 @@ public:
         }
     }
 
-    // Метод для виведення вмісту об'єкту на екран
     void Output() const
     {
         cout << "\n--- Об'єкт нерухомості ---\n"
@@ -147,7 +138,6 @@ public:
             << "---------------------------------\n";
     }
 
-    // Метод для оновлення ціни на вказаний відсоток
     void updatePrice(double percentage)
     {
         if (percentage < -100) {
@@ -166,20 +156,16 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    // 1. Створити об'єкт розробленого класу
     RealEstate myProperty;
 
-    // 2. Забезпечити ввід даних
     myProperty.Input();
 
     cout << "\nОб'єкт успішно створено. Початкові дані:";
     myProperty.Output();
 
-    // 3. Провести дії, представлені розробленим методом
     double percentage = 0;
     cout << "\n--- Дія: Оновлення ціни ---\n";
 
-    // Окремий блок валідації для вводу відсотка
     while (true) {
         cout << "Введіть відсоток, на який треба змінити ціну (напр., 10 або -5): ";
         try {
@@ -199,11 +185,11 @@ int main()
 
     myProperty.updatePrice(percentage);
 
-    // 4. Вивести результати на екран
     cout << "Оновлені дані об'єкта:";
     myProperty.Output();
 
     cout << endl;
     system("pause");
     return 0;
+
 }
