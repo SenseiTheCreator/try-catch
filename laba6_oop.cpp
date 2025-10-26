@@ -7,7 +7,6 @@
 #include <windows.h> 
 using namespace std;
 
-// Клас «Нерухомість»
 class Nerukhomist
 {
 private:
@@ -16,22 +15,19 @@ private:
     string rentEnd;
 
 public:
-    // Конструктор ініціалізації з параметрами
     Nerukhomist(string n, double a, string r) : name(n), area(a), rentEnd(r) {}
 
-    // Метод для введення/зміни даних користувачем
     void Input()
     {
-        cout << "\n\n- Введіть назву нерухомості: ";
+        cout << "\n\n- Г‚ГўГҐГ¤ВіГІГј Г­Г Г§ГўГі Г­ГҐГ°ГіГµГ®Г¬Г®Г±ГІВі: ";
         getline(cin, name);
 
-        // Введення площі з обробкою винятків
         while (true) {
-            cout << "- Введіть площу (м2): ";
+            cout << "- Г‚ГўГҐГ¤ВіГІГј ГЇГ«Г®Г№Гі (Г¬2): ";
             try {
                 cin >> area;
                 if (cin.fail() || area <= 0) {
-                    throw runtime_error("Площа повинна бути додатнім дійсним числом.");
+                    throw runtime_error("ГЏГ«Г®Г№Г  ГЇГ®ГўГЁГ­Г­Г  ГЎГіГІГЁ Г¤Г®Г¤Г ГІГ­ВіГ¬ Г¤ВіГ©Г±Г­ГЁГ¬ Г·ГЁГ±Г«Г®Г¬.");
                 }
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
@@ -39,17 +35,16 @@ public:
             catch (const runtime_error& e) {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                MessageBoxA(NULL, e.what(), "Помилка вводу", MB_OK | MB_ICONERROR);
+                MessageBoxA(NULL, e.what(), "ГЏГ®Г¬ГЁГ«ГЄГ  ГўГўГ®Г¤Гі", MB_OK | MB_ICONERROR);
             }
         }
 
-        // Введення дати з обробкою винятків
         while (true) {
-            cout << "- Введіть дату завершення договору (РРРР-ММ-ДД): ";
+            cout << "- Г‚ГўГҐГ¤ВіГІГј Г¤Г ГІГі Г§Г ГўГҐГ°ГёГҐГ­Г­Гї Г¤Г®ГЈГ®ГўГ®Г°Гі (ГђГђГђГђ-ГЊГЊ-Г„Г„): ";
             try {
                 cin >> rentEnd;
                 if (rentEnd.length() != 10 || rentEnd[4] != '-' || rentEnd[7] != '-') {
-                    throw runtime_error("Неправильний формат дати. Очікується РРРР-ММ-ДД.");
+                    throw runtime_error("ГЌГҐГЇГ°Г ГўГЁГ«ГјГ­ГЁГ© ГґГ®Г°Г¬Г ГІ Г¤Г ГІГЁ. ГЋГ·ВіГЄГіВєГІГјГ±Гї ГђГђГђГђ-ГЊГЊ-Г„Г„.");
                 }
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break; 
@@ -57,25 +52,23 @@ public:
             catch (const runtime_error& e) {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                MessageBoxA(NULL, e.what(), "Помилка вводу", MB_OK | MB_ICONERROR);
+                MessageBoxA(NULL, e.what(), "ГЏГ®Г¬ГЁГ«ГЄГ  ГўГўГ®Г¤Гі", MB_OK | MB_ICONERROR);
             }
         }
     }
 
-    // Метод для виведення вмісту об'єкту на екран
     void Output() const
     {
         cout << fixed << setprecision(2);
-        cout << "\n Назва - " << name
-            << "\n Площа - " << area << " м2"
-            << "\n Договір до - " << rentEnd;
+        cout << "\n ГЌГ Г§ГўГ  - " << name
+            << "\n ГЏГ«Г®Г№Г  - " << area << " Г¬2"
+            << "\n Г„Г®ГЈГ®ГўВіГ° Г¤Г® - " << rentEnd;
     }
 
-    // Метод для обчислення суми продажу
     double calculateSalePrice(double pricePerSqm) const
     {
         if (pricePerSqm <= 0) {
-            throw runtime_error("Ціна за квадратний метр має бути додатною.");
+            throw runtime_error("Г–ВіГ­Г  Г§Г  ГЄГўГ Г¤Г°Г ГІГ­ГЁГ© Г¬ГҐГІГ° Г¬Г Вє ГЎГіГІГЁ Г¤Г®Г¤Г ГІГ­Г®Гѕ.");
         }
         return area * pricePerSqm;
     }
@@ -86,37 +79,38 @@ int main()
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    Nerukhomist myRealEstate("Квартира в с. Нові Кривотули", 75.5, "2026-05-20");
+    Nerukhomist myRealEstate("ГЉГўГ Г°ГІГЁГ°Г  Гў Г±. ГЌГ®ГўВі ГЉГ°ГЁГўГ®ГІГіГ«ГЁ", 75.5, "2026-05-20");
 
-    cout << "== Початкові дані об'єкта 'Нерухомість':" << endl;
+    cout << "== ГЏГ®Г·Г ГІГЄГ®ГўВі Г¤Г Г­Ві Г®ГЎ'ВєГЄГІГ  'ГЌГҐГ°ГіГµГ®Г¬ВіГ±ГІГј':" << endl;
     myRealEstate.Output();
 
     myRealEstate.Input();
 
-    cout << "\n\n== Оновлені дані об'єкта 'Нерухомість':" << endl;
+    cout << "\n\n== ГЋГ­Г®ГўГ«ГҐГ­Ві Г¤Г Г­Ві Г®ГЎ'ВєГЄГІГ  'ГЌГҐГ°ГіГµГ®Г¬ВіГ±ГІГј':" << endl;
     myRealEstate.Output();
 
     while (true) {
         try {
             double price_input;
-            cout << "\n\nВведіть ціну за м2 для розрахунку вартості: ";
+            cout << "\n\nГ‚ГўГҐГ¤ВіГІГј Г¶ВіГ­Гі Г§Г  Г¬2 Г¤Г«Гї Г°Г®Г§Г°Г ГµГіГ­ГЄГі ГўГ Г°ГІГ®Г±ГІВі: ";
             cin >> price_input;
             if (cin.fail()) {
-                throw runtime_error("Ціна повинна бути числом.");
+                throw runtime_error("Г–ВіГ­Г  ГЇГ®ГўГЁГ­Г­Г  ГЎГіГІГЁ Г·ГЁГ±Г«Г®Г¬.");
             }
             double totalPrice = myRealEstate.calculateSalePrice(price_input);
-            cout << "Орієнтовна вартість продажу: "
+            cout << "ГЋГ°ВіВєГ­ГІГ®ГўГ­Г  ГўГ Г°ГІВіГ±ГІГј ГЇГ°Г®Г¤Г Г¦Гі: "
                 << fixed << setprecision(2) << totalPrice << " USDT " << endl;
             break;
         }
         catch (const runtime_error& e) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            MessageBoxA(NULL, e.what(), "Помилка розрахунку", MB_OK | MB_ICONERROR);
+            MessageBoxA(NULL, e.what(), "ГЏГ®Г¬ГЁГ«ГЄГ  Г°Г®Г§Г°Г ГµГіГ­ГЄГі", MB_OK | MB_ICONERROR);
         }
     }
 
     cout << endl << endl;
     system("pause");
     return 0;
+
 }
